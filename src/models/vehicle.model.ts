@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from "../database/database";
-const User = require ('./user.model');
-const Literal = require ('./literal.model');
+const User = require('./user.model');
+const Literal = require('./literal.model');
 
 class Vehicle extends Model {
   public vehicleId!: number;
@@ -13,6 +13,11 @@ class Vehicle extends Model {
   public vehicleStartKilometers!: number;
   public createdAt!: Date;
   public updatedAt!: Date;
+
+  public readonly type!: typeof Literal;
+  public readonly owner!: typeof User;
+  public readonly brand!: typeof Literal;
+
 }
 
 Vehicle.init(
@@ -24,6 +29,7 @@ Vehicle.init(
     },
     vehicleOwner: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: User,
         key: 'userId',
@@ -32,15 +38,24 @@ Vehicle.init(
     vehicleCustomId: {
       type: DataTypes.STRING(10),
     },
+    vehicleType: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Literal,
+        key: 'id',
+      },
+    },
     vehicleBrand: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: 'id',
       },
     },
     vehicleModel: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(20),
     },
     vehicleYear: {
       type: DataTypes.INTEGER,
@@ -59,8 +74,12 @@ Vehicle.init(
   },
   {
     sequelize,
+    modelName: 'Vehicle',
     tableName: 'vehicles',
   }
 );
 
+Vehicle.belongsTo(User, { foreignKey: 'vehicleOwner', as: 'owner' });
+Vehicle.belongsTo(Literal, { foreignKey: 'vehicleBrand', as: 'brand' });
+Vehicle.belongsTo(Literal, { foreignKey: 'VehicleType', as: 'type' });
 module.exports = Vehicle;

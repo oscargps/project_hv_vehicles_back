@@ -18,6 +18,8 @@ const literals = [
     { type: "Document_type", value: "SOAT" },
     { type: "Document_type", value: "RTM" },
     { type: "Document_type", value: "Licencia de transito" },
+    { type: "vehicle_type", value: "Motocicleta" },
+    { type: "vehicle_type", value: "Automovil" },
 ]
 export const createLiterals = async (LiteralModel: any) => {
     await Promise.all(literals.map((l) => LiteralModel.create(l)));
