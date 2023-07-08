@@ -6,7 +6,6 @@ import recordRouter from './routes/record.router';
 const app = express();
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
-app.use('/literals',literalRouter );
 app.use('/user',userRouter );
 app.use('/vehicles',vehicleRouter );
 app.use('/records',recordRouter );
