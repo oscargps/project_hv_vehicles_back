@@ -14,6 +14,10 @@ class Record extends Model {
   public recordDescription!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
+
+  public readonly type!: typeof Literal;
+  public readonly vehicle!: typeof Vehicle;
+  public readonly category!: typeof Literal;
 }
 
 Record.init(
@@ -39,6 +43,7 @@ Record.init(
     },
     recordDate: {
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     },
     recordCategory: {
       type: DataTypes.INTEGER,
@@ -72,5 +77,9 @@ Record.init(
     tableName: 'records',
   }
 );
+Record.belongsTo(Literal, { foreignKey: 'recordType', as: 'type' });
+Record.belongsTo(Literal, { foreignKey: 'recordCategory', as: 'category' });
+Record.belongsTo(Vehicle, { foreignKey: 'recordVehicle', as: 'vehicle' });
+
 
 module.exports = Record;
