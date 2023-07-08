@@ -1,7 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from "../database/database";
-const Literal = require ('./literal.model');
-
+const Literal = require('./literal.model');
 class User extends Model {
   public userId!: number;
   public userName!: string;
@@ -16,6 +15,13 @@ class User extends Model {
   public userLastUpdate!: Date;
   public createdAt!: Date;
   public updatedAt!: Date;
+
+  public readonly subscriptionType!: typeof Literal;
+  public readonly subscriptionStatus!: typeof Literal;
+  public readonly city!: typeof Literal;
+  public readonly country!: typeof Literal;
+
+
 }
 
 User.init(
@@ -55,6 +61,7 @@ User.init(
     },
     userSubscriptionStatus: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: 'id',
@@ -91,7 +98,13 @@ User.init(
   {
     sequelize,
     tableName: 'users',
+    timestamps: true,
   }
 );
+
+User.belongsTo(Literal, { foreignKey: 'userSubscriptionType', as: 'subscriptionType' });
+User.belongsTo(Literal, { foreignKey: 'userSubscriptionStatus', as: 'subscriptionStatus' });
+User.belongsTo(Literal, { foreignKey: 'userCity', as: 'city' });
+User.belongsTo(Literal, { foreignKey: 'userCountry', as: 'country' });
 
 module.exports = User;

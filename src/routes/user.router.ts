@@ -9,8 +9,8 @@ class UserRouter {
   }
 
   private config() {
-    this.router.get("/user", userController.getUsers);
-    this.router.post("/user", userController.createUser);
+    this.router.get("/", userController.getUsers);
+    this.router.post("/create", userController.createUser);
   }
 }
 

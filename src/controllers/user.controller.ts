@@ -1,10 +1,24 @@
 import httpStatus from "http-status";
 import { Request, Response } from "express";
+const Literal = require("../models/literal.model");
 const User = require("../models/user.model");
 class UserController {
     public async getUsers(request: Request, res: Response, next: any) {
         try {
-            const users = await User.findAll();
+            const users = await User.findAll( {
+                include: [
+                  {
+                    model: Literal,
+                    as: 'subscriptionType',
+                    attributes: ['value'], // Obtener solo el nombre del documento
+                  },
+                  {
+                    model: Literal,
+                    as: 'subscriptionStatus',
+                    attributes: ['value'], // Obtener solo el nombre del documento
+                  }
+                ],
+              });
             res.status(httpStatus.OK).json(users);
         } catch (error: any) {
             res.status(error.Status.StatusCode).json({ result: "error" });
@@ -19,6 +33,7 @@ class UserController {
         }
     }
 }
+
 
 const userController = new UserController();
 export default userController;
