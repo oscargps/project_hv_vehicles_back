@@ -9,6 +9,7 @@ class RecordRouter {
 
   private config() {
     this.router.get("/", recordController.getRecordsByVehicle);
+    this.router.get("/detail", recordController.getRecordDetails);
     this.router.post("/create", recordController.createRecord);
   }
 }

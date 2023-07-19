@@ -54,6 +54,7 @@ User.init(
     },
     userSubscriptionType: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: 'id',

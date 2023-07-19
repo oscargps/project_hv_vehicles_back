@@ -3,7 +3,21 @@ import sequelize from "../database/database";
 const Vehicle = require ('./vehicle.model');
 const Literal = require ('./literal.model');
 
-class Record extends Model {
+export interface RecordAttributes {
+  recordId: number;
+  recordVehicle: number;
+  recordType: number;
+  recordDate: Date;
+  recordCategory: number;
+  recordKilometers?: number | null;
+  recordLocation?: string | null;
+  recordDescription?: string;
+  createdAt?: Date
+  updatedAt?: Date
+}
+
+
+class Record extends Model<RecordAttributes> {
   public recordId!: number;
   public recordVehicle!: number;
   public recordType!: number;
@@ -29,6 +43,7 @@ Record.init(
     },
     recordVehicle: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Vehicle,
         key: 'vehicleId',
@@ -36,6 +51,7 @@ Record.init(
     },
     recordType: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: 'id',
@@ -43,10 +59,12 @@ Record.init(
     },
     recordDate: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
     },
     recordCategory: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: 'id',
@@ -62,6 +80,7 @@ Record.init(
     },
     recordDescription: {
       type: DataTypes.TEXT,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,

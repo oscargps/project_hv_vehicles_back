@@ -19,6 +19,7 @@ RecordEvidence.init(
     },
     evidenceRecordId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Record,
         key: 'recordId',
@@ -26,6 +27,7 @@ RecordEvidence.init(
     },
     evidenceLocation: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -38,7 +40,7 @@ RecordEvidence.init(
   },
   {
     sequelize,
-    tableName: 'records_evidences',
+    tableName: 'record_evidences',
   }
 );
 

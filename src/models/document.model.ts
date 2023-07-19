@@ -27,13 +27,15 @@ Document_Model.init(
     },
     documentType: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: "id",
       },
     },
     documentCustomId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(100),
+      allowNull: true,
     },
     documentVehicle: {
       type: DataTypes.INTEGER,
@@ -45,6 +47,7 @@ Document_Model.init(
     },
     documentOwner: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: User,
         key: "userId",
@@ -52,12 +55,15 @@ Document_Model.init(
     },
     documentStartDate: {
       type: DataTypes.DATE,
+      allowNull: false,
     },
     documentExpirationDate: {
       type: DataTypes.DATE,
+      allowNull: true,
     },
     documentStatus: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: Literal,
         key: "id",

@@ -7,6 +7,7 @@ class Vehicle extends Model {
   public vehicleId!: number;
   public vehicleOwner!: number;
   public vehicleCustomId!: string;
+  public vehicleType!: string;
   public vehicleBrand!: number;
   public vehicleModel!: number;
   public vehicleYear!: number;
@@ -81,5 +82,5 @@ Vehicle.init(
 
 Vehicle.belongsTo(User, { foreignKey: 'vehicleOwner', as: 'owner' });
 Vehicle.belongsTo(Literal, { foreignKey: 'vehicleBrand', as: 'brand' });
-Vehicle.belongsTo(Literal, { foreignKey: 'VehicleType', as: 'type' });
+Vehicle.belongsTo(Literal, { foreignKey: 'vehicleType', as: 'type' });
 module.exports = Vehicle;
