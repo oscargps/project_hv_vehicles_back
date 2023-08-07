@@ -11,7 +11,7 @@ const literals = [
     { id: 10, type: "vehicule_brand", value: "Suzuki" },
     { id: 11, type: "record_type", value: "Alerta" },
     { id: 12, type: "record_type", value: "Informativo" },
-    { id: 13, type: "record_type", value: "Peligro" },
+    { id: 13, type: "record_type", value: "Riesgo" },
     { id: 14, type: "record_category", value: "Tanqueo" },
     { id: 15, type: "record_category", value: "Reparación" },
     { id: 16, type: "record_category", value: "Mantenimiento" },
