@@ -49,7 +49,7 @@ RecordFuelData.init(
             },
         },
         recordFuelQuantity: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: true,
         },
         recordFuelCost: {

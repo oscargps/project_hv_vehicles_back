@@ -49,7 +49,7 @@ Record.init(
         key: 'vehicleId',
       },
     },
-    recordType: {
+    recordCategory: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -62,7 +62,7 @@ Record.init(
       defaultValue: DataTypes.NOW,
       allowNull: false,
     },
-    recordCategory: {
+    recordType: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

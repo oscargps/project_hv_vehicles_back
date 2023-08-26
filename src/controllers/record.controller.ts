@@ -52,8 +52,7 @@ class RecordController {
       try {
         const record = await Record.findByPk(req.get('recordId'))
         let dataRecord: any
-        console.log("🚀 ~ file: record.controller.ts:52 ~ RecordController ~ getRecordDetails ~ record:", record)
-        if (record.recordType === 14) {
+        if (record.recordCategory === 14) {
           dataRecord = await RecordFuelData.findAll({
             where: {
               recordId: req.get('recordId')
@@ -94,7 +93,7 @@ class RecordController {
       const RecordBody = request.body as IRecordRequest
       const { data, ...RecordData } = RecordBody
       const savedRecord: RecordAttributes = await Record.create(RecordData)
-      if (RecordBody.recordType === 14) {
+      if (RecordBody.recordCategory === 14) {
         RecordFuelData.create({
           recordId: savedRecord.recordId,
           ...RecordBody.data
